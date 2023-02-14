@@ -33,9 +33,9 @@ Here's an example configuration file that synchronizes two calendar feeds and st
     metadata = ["color"]
     target = "merged.ics"
 
-The `[pair mycalendars]` section tells vdirsyncer to synchronize two calendars, calendar1 and calendar2, and merge them into a single calendar called merged.ics. The collections option tells vdirsyncer to include events from both calendars in the merged calendar. The metadata option tells vdirsyncer to preserve certain metadata, such as the color of events.
+The `[pair mycalendars]` section tells vdirsyncer to synchronize two calendars, `calendar1` and `calendar2`, and merge them into a single calendar called `merged.ics`. The `collections` option tells vdirsyncer to include events from both calendars in the merged calendar. The `metadata` option tells vdirsyncer to preserve certain metadata, such as the color of events.
 
-You will also need to configure the storage backends for each calendar. In the example above, calendar1 and calendar2 are the names of the storage backends. Here is an example of how to configure a CalDAV backend:
+You will also need to configure the storage backends for each calendar. In the example above, `calendar1 and `calendar2` are the names of the storage backends. Here is an example of how to configure a CalDAV backend:
 
     [storage calendar1]
     type = "caldav"
