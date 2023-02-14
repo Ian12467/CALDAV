@@ -7,7 +7,7 @@ Ideally , it would also allow filtering the events and add name prefixes to the 
 
 # A general outline of the steps to take to create the tool
 
-## Step1: Use vdirsyncer to synchronize the calendar feeds and merge them into one.
+## Step1: ### Use vdirsyncer to synchronize the calendar feeds and merge them into one.
 -------------
 You will need to first install vdirsyncer on your system
     -Run:
