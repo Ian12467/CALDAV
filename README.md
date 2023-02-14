@@ -12,13 +12,15 @@ Create and update an event in next cloud calender with API CALDAV and http node.
 ### Step1:  Use vdirsyncer to synchronize the calendar feeds and merge them into one.
 -------------
 You will need to first install vdirsyncer on your system
--Run:
+* Run:
 ```sh
 pip install vdirsyncer
 ```
 
+#### create a storage file
+-------------
 create a configuration file that tells vdirsyncer which calendar feeds to synchronize and where to store the merged calendar.
-    -The configuration file is typically called config.ini and is stored in the ~/.vdirsyncer directory
+    * The configuration file is typically called ```config.ini``` and is stored in the ```~/.vdirsyncer``` directory
 Here's an example configuration file that synchronizes two calendar feeds and stores the merged calendar in a file called merged.ics:
 
     [general]
