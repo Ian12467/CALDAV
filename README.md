@@ -1,13 +1,15 @@
 # CALDAV
-
+--------------
+____
 ### DESCRIPTION 
 --------------
 This is a self hosted tool that takes multiple url subscriptions and split out a url that points to a merged feed to them, updated regularly.
-Ideally , it would also allow filtering the events and add name prefixes to the event titles
+Ideally , it would also allow filtering the events and add name prefixes to the event titles.
 
 # A general outline of the steps to take to create the tool
-
-## Step1: ### Use vdirsyncer to synchronize the calendar feeds and merge them into one.
+-------------
+Create and update an event in next cloud calender with API CALDAV and http node.
+### Step1:  Use vdirsyncer to synchronize the calendar feeds and merge them into one.
 -------------
 You will need to first install vdirsyncer on your system
     -Run:
