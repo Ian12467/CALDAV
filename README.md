@@ -43,7 +43,7 @@ You will also need to configure the storage backends for each calendar. In the e
     username = "user"
     password = "pass"
 
-With this configuration, vdirsyncer will connect to the specified CalDAV server using the provided credentials and synchronize the calendar.
+With this configuration, `vdirsyncer` will connect to the specified CalDAV server using the provided credentials and synchronize the calendar.
 
 Once you have created the configuration file, you can use the following command to synchronize the calendars and merge them into one:
     
@@ -53,11 +53,11 @@ This will read your configuration file, connect to the specified calendars, and 
 
 Please be aware that you will need to keep this command running periodically (e.g. by using a cron job) to ensure that the merged calendar stays up-to-date.
 
-##Step 2: Use icalendar to parse the merged iCalendar file and access the events
+### Step 2: Use icalendar to parse the merged iCalendar file and access the events
 
 Once you have used vdirsyncer to merge your calendar feeds into a single iCalendar file, you can use the icalendar library to parse the file and access the events.
 
-Here's an example of how you can use icalendar to parse the merged.ics file and print the summary (i.e. the title) of each event:
+Here's an example of how you can use icalendar to parse the `merged.ics` file and print the summary (i.e. the title) of each event:
 
     from icalendar import Calendar
 
@@ -70,13 +70,13 @@ Here's an example of how you can use icalendar to parse the merged.ics file and 
             print(component.get('summary'))
 
 
-This code opens the merged.ics file, reads its contents, and creates a Calendar object from the iCalendar data using the from_ical method. It then uses the walk method to iterate over all the components of the calendar and checks the name of each component. When it finds a component with the name "VEVENT", it prints the summary of the event, which is the title of the event.
+This code opens the `merged.ics` file, reads its contents, and creates a Calendar object from the iCalendar data using the `from_ical` method. It then uses the `walk` method to iterate over all the components of the calendar and checks the `name` of each component. When it finds a component with the name "VEVENT", it prints the `summary` of the event, which is the title of the event.
 
 You can also use the icalendar library to add, modify or delete events in the calendar by manipulating the Calendar object.
 
 You can also use the icalendar library to add, modify or delete events in the calendar by manipulating the Calendar object.
 
-To add an event to a calendar using the icalendar library, you can create an instance of the Event class and add it to the calendar object. Here's an example of how you can add an event to the calendar object:
+To add an event to a calendar using the icalendar library, you can create an instance of the `Event` class and add it to the calendar object. Here's an example of how you can add an event to the `calendar` object:
 
 from icalendar import Event
 
@@ -90,27 +90,27 @@ calendar.add_component(event)
 
 This creates an event with a summary of "Test Event", starting at 8:00am on January 1, 2022, and ending at 9:00am on the same day. It also adds a timestamp for the current time.
 
-To modify an event, you can locate the event you want to modify in the calendar object and change its properties. Here's an example of how you can change the summary of an event in the calendar object:
+To modify an event, you can locate the event you want to modify in the `calendar` object and change its properties. Here's an example of how you can change the summary of an event in the `calendar` object:
 
 for component in calendar.walk():
     if component.name == "VEVENT":
         if component.get('summary') == "Test Event":
             component.add("summary", "Modified Event")
 
-This code iterates over all the components in the calendar object, checks if the component is an event, and then checks if the summary of the event is "Test Event". If it is, it changes the summary to "Modified Event".
+This code iterates over all the components in the `calendar` object, checks if the component is an event, and then checks if the summary of the event is "Test Event". If it is, it changes the summary to "Modified Event".
 
-To delete an event, you can locate the event you want to delete in the calendar object and remove it. Here's an example of how you can delete an event from the calendar object:
+To delete an event, you can locate the event you want to delete in the `calendar` object and remove it. Here's an example of how you can delete an event from the `calendar` object:
 
 for component in calendar.walk():
     if component.name == "VEVENT":
         if component.get('summary') == "Modified Event":
             calendar.subcomponents.remove(component)
 
-This code iterates over all the components in the calendar object, checks if the component is an event, and then checks if the summary of the event is "Modified Event". If it is, it removes the event from the calendar object.
+This code iterates over all the components in the `calendar` object, checks if the component is an event, and then checks if the summary of the event is "Modified Event". If it is, it removes the event from the `calendar` object.
 
-Please note that the above examples assume that the datetime module is imported and the events are being added, modified or deleted before writing the new calendar object to the file.
+Please note that the above examples assume that the `datetime` module is imported and the events are being added, modified or deleted before writing the new calendar object to the file.
 
-##Step 3: Use IHP to create a web interface for the tool that allows users to input the URLs of their calendar feeds.
+### Step 3: Use IHP to create a web interface for the tool that allows users to input the URLs of their calendar feeds.
 
 IHP (Iced Haskel Platform) is a web framework that allows you to create web applications in Haskell. It provides a high-level API for building web applications and a set of conventions for structuring your code.
 
@@ -144,19 +144,19 @@ data CalendarForm = CalendarForm
 calendarForm :: Form CalendarForm
 calendarForm = CalendarForm
     <$> "url" .: textField
-This code defines a CalendarController which has two actions, startAction and showAction. The startAction is used to display the form to the user and the showAction is used to handle the form submission. The CalendarForm data type is used to hold the data entered by the user in the form.
+This code defines a `CalendarController` which has two actions, `startAction` and `showAction`. The `startAction` is used to display the form to the user and the `showAction` is used to handle the form submission. The `CalendarForm` data type is used to hold the data entered by the user in the form.
 
-The calendarForm function is used to create the form fields and it defines a single text field for the URL.
+The `calendarForm` function is used to create the form fields and it defines a single text field for the URL.
 
-When the form is submitted, you can handle the form submission in the showAction and use the url from the form to run the merge process and update the calendar feed.
+When the form is submitted, you can handle the form submission in the `showAction` and use the `url` from the form to run the merge process and update the calendar feed.
 
 Please note that this is a simple example, and you may need to adjust it to work with your specific use case and also need to import the necessary libraries and modules.
 
-##Step 4: Use IHP's built-in functionality for filtering and adding prefixes to event titles.
+### Step 4: Use IHP's built-in functionality for filtering and adding prefixes to event titles
 
 IHP provides several built-in functions that you can use to filter and add prefixes to event titles in your calendar feed.
 
-To filter events, you can use the filterEvents function which takes a predicate function and a list of events and returns a list of events that satisfy the predicate. Here's an example of how you might use filterEvents to filter events based on their summary:
+To filter events, you can use the `filterEvents` function which takes a predicate function and a list of events and returns a list of events that satisfy the predicate. Here's an example of how you might use `filterEvents` to filter events based on their summary:
 
 import IHP.Calendar
 import Data.Text (isInfixOf)
@@ -165,7 +165,7 @@ import Data.Text (isInfixOf)
 filteredEvents :: [Event] -> [Event]
 filteredEvents = filterEvents (\event -> "Meeting" `isInfixOf` eventSummary event)
 
-To add a prefix to event titles, you can use the mapEvents function which takes a function and a list of events and applies the function to each event in the list. Here's an example of how you might use mapEvents to add a prefix to event titles:
+To add a prefix to event titles, you can use the `mapEvents` function which takes a function and a list of events and applies the function to each event in the list. Here's an example of how you might use `mapEvents` to add a prefix to event titles:
 
 import IHP.Calendar
 
@@ -180,16 +180,16 @@ filteredAndPrefixedEvents = mapEvents (\event -> event { eventSummary = "Importa
 
 It's important to note that these examples are just a basic demonstration of how you can use IHP's built-in functionality for filtering and adding prefixes to event titles. You'll need to adjust them to suit your specific use case, but it gives you an idea of the kind of functionality that's available to you in IHP.
 
-##Step 5: Create a background job (such as cron) to regularly update the merged feed and ensure that it stays up-to-date.
+### Step 5: Create a background job (such as cron) to regularly update the merged feed and ensure that it stays up-to-date.
 
 
 To create a background job that regularly updates the merged calendar feed, you can use a tool like cron on Linux or Task Scheduler on Windows.
 
 Cron is a built-in tool on Linux systems that allows you to schedule tasks to be run at specified intervals. Here's an example of how you might use cron to run a script every hour that updates your merged calendar feed:
 
-    ### step 5.1: Create a script that updates your merged calendar feed. This script should use vdirsyncer to synchronize the calendar feeds, icalendar to parse the merged iCalendar file and access the events and IHP to create a web interface for the tool that allows users to input the URLs of their calendar feeds
+##### step 5.1: Create a script that updates your merged calendar feed. This script should use vdirsyncer to synchronize the calendar feeds, icalendar to parse the merged iCalendar file and access the events and IHP to create a web interface for the tool that allows users to input the URLs of their calendar feeds
 
-    Here is an example of a script that updates your merged calendar feed using vdirsyncer, icalendar, and IHP:
+* Here is an example of a script that updates your merged calendar feed using vdirsyncer, icalendar, and IHP:
 
 #!/bin/bash
 
@@ -213,24 +213,25 @@ You will need to modify the script to match your specific needs, such as adding 
 
 You should also test the script to make sure it works as expected before deploying it to a production environment.
 
-
-    ###step 5.2: Open the terminal and run the command crontab -e to open the crontab file.
-    ###step 5.3: Add the following line to the file, replacing /path/to/script.sh with the path to your script:
+##### step 5.2: Open the terminal and run the command `crontab -e` to open the crontab file.
+##### step 5.3: Add the following line to the file, replacing `/path/to/script.sh` with the path to your script:
 
         0 * * * * /path/to/script.sh
 
     This will run your script every hour at the 0th minute
 =======
-# CALDAV -haskell programming
+### Creating events in nextcloud calender
 
 To create and update events in a Nextcloud calendar using the CalDAV API and the HTTP Node library. Here's an example of how you might do this in Node.js:
 
-######Install the http-request package:
+* Install the http-request package:
 
+```sh 
 npm install http-request
-######Import the package in your project:
-
+```
+* Import the package in your project:
+```sh
 const HttpRequest = require('http-request');
+```
 
-To create an event, you'll need to send a POST request to the Nextcloud calendar endpoint, passing the event data in the body of the request.
->>>>>>> 426ca70a5f51f541d6a319bb784dee9b92516504
+To create an event, you'll need to send a `POST` request to the Nextcloud calendar endpoint, passing the event data in the body of the request.
